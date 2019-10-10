@@ -7,32 +7,29 @@ import sys
 # recursive solution
 # def eating_cookies(n, cache=None):
 
-counter = 0
 
+def eating_cookies(n, cache=None):
+    # Without Caching.
+    # if n == 0:
+    #     return 1
+    # elif n < 1:
+    #     return 0
+    # else:
+    #     return(eating_cookies(n-1) + eating_cookies(n-2) + eating_cookies(n-3))
 
-def eating_cookies(n):
-    global counter
-    if n == 0:
-        return counter
-
-    four_ways = [1, 2, 3]
-    # N = number of cookies
-    # 3 ways to subtract a cookie
-    # Each time we subtract a cookie (meaning he ate the cookie(s)), we increase the counter += 1
-    if n > 0:
-        print("before n", n)
-        for i in four_ways:
-            n = n - i
-            print("i", i)
-            counter += 1
-            print(counter)
-            print("n", n)
-            return eating_cookies(n)
-
-    return counter
-
-
-print(eating_cookies(3))
+    # With Caching
+    if n < 0:
+        return 0
+    elif n == 0:
+        return 1
+    elif cache and cache[n] > 0:
+        return cache[n]
+    else:
+        if not cache:
+            cache = {i: 0 for i in range(n+1)}
+        cache[n] = eating_cookies(
+            n-1, cache) + eating_cookies(n-2, cache) + eating_cookies(n-3, cache)
+        return cache[n]
 
 # if __name__ == "__main__":
 #   if len(sys.argv) > 1:
