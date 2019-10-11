@@ -2,12 +2,21 @@
 
 import math
 
+
 def recipe_batches(recipe, ingredients):
-  pass 
+    # base case: if any of the ingredients < recipe, then return 0
+    if len(recipe) > len(ingredients) or len(ingredients) > len(recipe):
+        return 0
+
+    array = []
+    for i in recipe and ingredients:        
+        array.append(ingredients[i] // recipe[i])
+        
+    return min(array)
 
 
 if __name__ == '__main__':
-  # Change the entries of these dictionaries to test 
+  # Change the entries of these dictionaries to test
   # your implementation with different inputs
   recipe = { 'milk': 100, 'butter': 50, 'flour': 5 }
   ingredients = { 'milk': 132, 'butter': 48, 'flour': 51 }
